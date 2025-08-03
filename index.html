@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <input id="imagenLocal" type="file" accept="image/jpeg,image/png,image/avif,image/webp">
+  <label for="formatoSalida">Convertir a:</label>
+  <select name="formatoSalida" id="formatoSalida">
+    <option value="image/jpeg">JPG</option>
+    <option value="image/png">PNG</option>
+    <option value="image/avif">AVIF</option>
+    <option value="image/webp">WEBP</option>
+  </select>
+  <label for="calidad">Calidad:</label>
+  <input id="calidad" type="range" step="0.01" min="0.1" max="1" value="1">
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
