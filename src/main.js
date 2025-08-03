@@ -2,7 +2,19 @@ import './style.css'
 const $input = document.querySelector("#imagenLocal");
 const $calidad = document.querySelector("#calidad");
 const $formatoSalida = document.querySelector("#formatoSalida");
+const $indicadorCargando = document.querySelector("#indicadorCargando");
+const $etiquetaCalidad = document.querySelector("#etiquetaCalidad");
 const permitidos = ["image/jpeg", "image/png", "image/avif", "image/webp"];
+$indicadorCargando.style.visibility = "hidden";
+
+const refrescarCalidad = () => {
+  $etiquetaCalidad.textContent = `2. Calidad: (${($calidad.value * 100).toFixed(2)} %)`
+}
+refrescarCalidad();
+
+$calidad.oninput = () => {
+  refrescarCalidad();
+}
 
 const extensionSegunFormatoSalida = (formato) => {
   if (formato === "image/jpeg") {
@@ -20,6 +32,8 @@ $input.onchange = async (e) => {
     $input.value = "";
     return alert("Tipo de imagen no soportado");
   }
+
+  $indicadorCargando.style.visibility = "visible";
   const imagenComoBitmap = await createImageBitmap(primerArchivo);
   const canvasFueraDePantalla = new OffscreenCanvas(imagenComoBitmap.width, imagenComoBitmap.height);
   const contexto = canvasFueraDePantalla.getContext("2d");
@@ -34,4 +48,5 @@ $input.onchange = async (e) => {
   a.click();
   URL.revokeObjectURL(url);
   $input.value = "";
+  $indicadorCargando.style.visibility = "hidden";
 }
